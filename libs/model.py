@@ -19,6 +19,9 @@ class EncoderCNN(nn.Module):
         self.bn2 = nn.BatchNorm1d(embed_size, momentum=0.01)
 
         for m in self.modules():
+            """
+            为网络中的每一个模块进行推荐值的初始化。
+            """
             if isinstance(m, nn.Conv3d):
                 nn.init.xavier_normal_(m.weight)
                 if m.bias is not None:
@@ -39,7 +42,7 @@ class EncoderCNN(nn.Module):
         x = self.bn1(x)
         x = F.relu(x)
         x = self.avgpool(x)
-        x = x.view(batch_size, -1)
+        x = x.view(batch_size, -1) # view起到的作用是reshape,view的参数的是改变后的shape
         x = self.linear(x)
         x = self.bn2(x)
         return x

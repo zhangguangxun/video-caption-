@@ -122,7 +122,7 @@ def collate_fn(data):
         cap_list.append(d['caption'])
 
     # merge features from tuple of 4D tensor to 5D tensor
-    #features = torch.stack(feat_list, dim=0)
+    features = torch.stack(feat_list, dim=0)
 
     # Merge captions (from tuple of 1D tensor to 2D tensor).
     lengths = [len(cap) for cap in cap_list]
